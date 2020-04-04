@@ -1,0 +1,8 @@
+version: "2"
+services:
+  travolic_task_backEnd:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
