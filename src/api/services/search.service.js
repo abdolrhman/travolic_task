@@ -49,6 +49,9 @@ class SearchCriteria {
     let citySearchResult = [];
     let priceSearchResult = [];
     let dateSearchResult = [];
+    if (_.isEmpty(this.criteria)) {
+      return this.list;
+    }
     Object.keys(this.criteria).forEach((key) => {
       if (key === 'name') {
         nameSearchResult = this.nameSearch(this.criteria.name);
@@ -75,6 +78,7 @@ class SearchCriteria {
         dateSearchResult,
       );
     });
+
     return result;
   }
 }

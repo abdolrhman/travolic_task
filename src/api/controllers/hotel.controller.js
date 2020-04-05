@@ -1,6 +1,7 @@
 const axios = require('axios');
 const httpStatus = require('http-status');
 const SearchService = require('../services/search.service');
+const OrganizerService = require('../services/organizer.service');
 const vars = require('../../config/vars');
 
 /**
@@ -16,6 +17,7 @@ function getAllHotel(hotels, page = 1, items = 5) {
   return hotels.slice(indexStart, indexEnd);
 }
 
+
 /**
  * List Hotels
  * @public
@@ -26,17 +28,25 @@ exports.search = async (req, res, next) => {
     const apiResult = await axios.get(vars.hotels_api_url);
 
     // filter result
-    let filteredData = new SearchService(apiResult.data, req.query);
-    filteredData = filteredData.result();
+    const searchService = new SearchService(apiResult.data, req.query);
+    let result = searchService.result();
 
-    // paginate result
-    const paginatedResult = getAllHotel(
-      filteredData,
-      req.query.page,
-      req.query.items,
-    );
+    // can't sort or paginate empty array
+    if (result && result.length) {
+    // sort result
+      if (req.query.sort) {
+        const sortOrg = new OrganizerService(result);
+        result = sortOrg.sortBy(req.query.sort);
+      }
+      // paginate result
+      result = getAllHotel(
+        result,
+        req.query.page,
+        req.query.items,
+      );
+    }
 
-    res.send({ hotels: paginatedResult });
+    res.send({ hotels: result });
   } catch (error) {
     next(error);
   }
