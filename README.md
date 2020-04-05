@@ -36,10 +36,10 @@ npm run test
 ## Objective
 
 - Consume Hotels API To:
-    - Filter Date
-    - Search
-    - Paginate
-    - Sort
+  - Filter Date
+  - Search
+  - Paginate
+  - Sort
 - In Generic, Optimize Way
 ## Folder Structure
 
@@ -55,7 +55,8 @@ npm run test
 ## Implementation Cycle
 
 - Two main components
-  - Search, this one has main methods to filter data,
+    - Search, this one has main methods to filter data,
         - ex: nameSearch, citySearch, DateSearch, priceSearch
-  - organize, methods to organize data,
+        
+    - organize, methods to organize data,
         - ex: sortBy, paginateHotels
