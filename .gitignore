@@ -47,3 +47,6 @@ jspm_packages
 .idea
 
 .vscode
+
+# Test file
+src/api/controllers/test.js
