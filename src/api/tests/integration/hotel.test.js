@@ -41,7 +41,7 @@ describe('GET /v1/hotels', () => {
 });
 
 describe('GET /v1/hotels?price', () => {
-  it('should return all hotels that its prices between 100 and 300', async done =>
+  it('should return all hotels that its prices between 100 and 300', async (done) =>
     request(app)
       .get('/v1/hotels?price=[100, 300]')
       .expect(httpStatus.FOUND)
@@ -56,7 +56,7 @@ describe('GET /v1/hotels?price', () => {
 });
 
 describe('GET /v1/hotels?name', () => {
-  it('should return all hotels that its name contains _expedita_ text', async done =>
+  it('should return all hotels that its name contains _expedita_ text', async (done) =>
     request(app)
       .get('/v1/hotels?name=expedita')
       .expect(httpStatus.FOUND)
@@ -70,7 +70,7 @@ describe('GET /v1/hotels?name', () => {
 });
 
 describe('GET /v1/hotels?city', () => {
-  it('should return all hotels that its city contains _East_ text', async done =>
+  it('should return all hotels that its city contains _East_ text', async (done) =>
     request(app)
       .get('/v1/hotels?name=East')
       .expect(httpStatus.FOUND)
@@ -84,7 +84,7 @@ describe('GET /v1/hotels?city', () => {
 });
 
 describe('GET /v1/hotels?date', () => {
-  it('should return all hotels that its date between 2020-03-1,2020-03-30', async done =>
+  it('should return all hotels that its date between 2020-03-1,2020-03-30', async (done) =>
     request(app)
       .get('/v1/hotels?name=2020-03-1,2020-03-30')
       .expect(httpStatus.FOUND)
@@ -102,7 +102,7 @@ describe('GET /v1/hotels?date', () => {
 });
 
 describe('GET /v1/hotels?name=expedita&price=[575,580]', () => {
-  it('should return all hotels that its price between 575,580 and name contain expedita', async done =>
+  it('should return all hotels that its price between 575,580 and name contain expedita', async (done) =>
     request(app)
       .get('/v1/hotels?name=2020-03-1,2020-03-30')
       .expect(httpStatus.FOUND)
