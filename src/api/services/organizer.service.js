@@ -11,7 +11,7 @@ class OrganizerService {
    * @param items
    * @returns {*}
    */
-  getAllHotel(page = 1, items = 5) {
+  getAllHotel(page = 1, items = 25) {
     const indexStart = (page - 1) * items;
     const indexEnd = indexStart + items;
     return this.list.slice(indexStart, indexEnd);
@@ -20,7 +20,7 @@ class OrganizerService {
   sortBy(sortCriteria) {
     const sortKeys = Object.keys(sortCriteria);
     const sortValues = Object.values(sortCriteria);
-    _.orderBy(this.list, sortKeys, sortValues)
+    _.orderBy(this.list, sortKeys, sortValues);
   }
 }
 
