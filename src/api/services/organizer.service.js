@@ -11,7 +11,7 @@ class OrganizerService {
    * @param items
    * @returns {*}
    */
-  getAllHotel(page = 1, items = 25) {
+  paginateData(page = 1, items = 25) {
     const indexStart = (page - 1) * items;
     const indexEnd = indexStart + items;
     return this.list.slice(indexStart, indexEnd);

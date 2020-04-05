@@ -5,22 +5,12 @@ const OrganizerService = require('../services/organizer.service');
 const vars = require('../../config/vars');
 
 /**
- * Private method for pagination
- * @param hotels
- * @param page
- * @param items
- * @returns {*}
- */
-function getAllHotel(hotels, page = 1, items = 5) {
-  const indexStart = (page - 1) * items;
-  const indexEnd = indexStart + items;
-  return hotels.slice(indexStart, indexEnd);
-}
-
-
-/**
- * List Hotels
- * @public
+ * Connect all layers together
+ * hint: filter -> sort -> paginate
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
  */
 exports.search = async (req, res, next) => {
   try {
@@ -33,14 +23,13 @@ exports.search = async (req, res, next) => {
 
     // can't sort or paginate empty array
     if (result && result.length) {
-    // sort result
+      // sort result
+      const OrgService = new OrganizerService(result);
       if (req.query.sort) {
-        const sortOrg = new OrganizerService(result);
-        result = sortOrg.sortBy(req.query.sort);
+        result = OrgService.sortBy(req.query.sort);
       }
       // paginate result
-      result = getAllHotel(
-        result,
+      result = OrgService.paginateData(
         req.query.page,
         req.query.items,
       );
